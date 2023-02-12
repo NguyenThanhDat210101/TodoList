@@ -98,7 +98,7 @@ $workController = new WorkController($model);
       messages: {
         name: {
           required: "Name is required",
-          minlength: "Max length name is 255"
+          maxlength: "Max length name is 255"
         },
         start_date: {
           required: "Start Date is required",
@@ -140,7 +140,7 @@ $workController = new WorkController($model);
       messages: {
         name: {
           required: "Name is required",
-          minlength: "Max length name is 255"
+          maxlength: "Max length name is 255"
         },
         start_date: {
           required: "Start Date is required",

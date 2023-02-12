@@ -63,4 +63,25 @@ class Model {
         $resultSet = $statement->get_result();
         return $resultSet->fetch_all(MYSQLI_ASSOC);
     }
+    
+    /**
+     * Create data to table
+     *
+     * @param array $data
+     * @return bool
+     */
+    public function insert($data) {
+        // Get field from key data insert
+        $field = implode(',',array_keys($data));
+        // query
+        $sql = "INSERT INTO $this->table($field)
+                   VALUES (?, ?, ?, ?)";
+        $statement = $this->connection->prepare($sql);
+        // Get value array
+        $values  = array_values($data);
+        // Input data with bind param
+        $statement->bind_param(str_repeat('s', count($data)),...$values);
+
+        return $statement->execute();
+    }
 }

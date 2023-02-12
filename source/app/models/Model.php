@@ -1,5 +1,6 @@
 <?php
-class Model {
+class Model
+{
     protected $connection = null;
     protected $username = '';
     protected $password = '';
@@ -86,5 +87,50 @@ class Model {
         $statement->bind_param(str_repeat('s', count($data)), ...$values);
 
         return $statement->execute();
+    }
+
+    /**
+     * Find data detail table by id
+     *
+     * @param int $id
+     * @return array
+     */
+    public function find($id)
+    {
+        $sql = "SELECT * FROM $this->table where id=?";
+        $statement = $this->connection->prepare($sql);
+        $statement->bind_param('i', $id);
+        $statement->execute();
+        // Retrieves all of the rows of the result 
+        $resultSet = $statement->get_result();
+        return $resultSet->fetch_assoc();
+    }
+
+    /**
+     * Update data table by id
+     *
+     * @param int $id
+     * @param data $request
+     * @return void
+     */
+    public function update($id, $request)
+    {
+        // Get name field from variable request
+        $keyRequest = [];
+        foreach ($request as $key => $values) {
+            $keyRequest[] = $key . '=?';
+        }
+        $field = implode(',', $keyRequest);
+        // Get value from variable request
+        $data =  array_values($request);
+        // Add id to the last array
+        $data[] = $id;
+        // Run sql
+        $sql = "UPDATE $this->table set $field where id=? ";
+        $statement = $this->connection->prepare($sql);
+        $statement->bind_param(str_repeat('s',count($request)).'i', ...$data);
+        $statement->execute();
+        // Get the number of records affected
+        return $statement->affected_rows;
     }
 }

@@ -1,3 +1,10 @@
+<?php
+require_once('./app/models/Work.php');
+require_once('./app/controllers/WorkController.php');
+
+$model = new Work();
+$workController = new WorkController($model);
+?>
 <div class="form-container space-top">
   <!-- Table list -->
   <?php require_once('./resources/views/table.php'); ?>
@@ -14,8 +21,9 @@
       },
       initialDate: currentDate,
       navLinks: true,
-      events: [],
-      editable: true
+      events: <?php echo json_encode($works); ?>,
+      editable: true,
+      
     });
     calendar.render();
   });

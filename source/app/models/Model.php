@@ -48,4 +48,19 @@ class Model {
         $this->table = $tableName;
         return $this;
     }
+
+    /**
+     * Get all data by table from database
+     *
+     * @return array
+     */
+    public function get($select = '*'){
+        $sql = "SELECT $select FROM $this->table";
+        // Run sql
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        // Retrieves all of the rows of the result 
+        $resultSet = $statement->get_result();
+        return $resultSet->fetch_all(MYSQLI_ASSOC);
+    }
 }

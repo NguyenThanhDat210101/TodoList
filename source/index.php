@@ -16,6 +16,12 @@
 
 <body>
     <?php
+    require_once('./app/models/Model.php');
+    require_once('./app/models/Work.php');
+    require_once('./app/controllers/WorkController.php');
+    // You can use to variable message in file message.php
+    require_once('./app/label/message.php');
+    require_once('./app/label/works/status.php');
     require_once('./resources/views/index.php');
     ?>
     <!-- Optional JavaScript -->

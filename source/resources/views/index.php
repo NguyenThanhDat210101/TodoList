@@ -11,6 +11,8 @@ $workController = new WorkController($model);
 <div class="form-container space-top">
   <!-- create -->
   <?php require_once('./resources/views/create.php'); ?>
+  <!-- Edit -->
+  <?php require_once('./resources/views/edit.php'); ?>
   <!-- Table list -->
   <?php require_once('./resources/views/table.php'); ?>
 </div>
@@ -28,6 +30,25 @@ $workController = new WorkController($model);
       navLinks: true,
       events: <?php echo json_encode($works); ?>,
       editable: true,
+      eventClick: function(event) {
+        let workId = event.event._def.publicId;
+        $('#modalEdit').modal('show');
+        $.ajax({
+          url: "./app/Services/DetailWorkService.php",
+          type: "GET",
+          data: {
+            workId: workId
+          },
+          success: function(result) {
+            let work = $.parseJSON(result);
+            $('#id_edit').val(work.id);
+            $('#name_edit').val(work.name);
+            $('#end_date_edit').val(work.end_date);
+            $('#start_date_edit').val(work.start_date);
+            $('#status_edit').val(work.status);
+          }
+        });
+      },
       dateClick: function(date) {
         $('#modalCreate').modal('show');
         // Set data hours have two number
@@ -55,6 +76,48 @@ $workController = new WorkController($model);
 
     //Validate insert_form
     $("#insert_form").validate({
+      rules: {
+        name: {
+          required: true,
+          maxlength: 255
+        },
+        start_date: {
+          required: true,
+          date: true,
+        },
+        end_date: {
+          required: true,
+          date: true,
+        },
+        status: {
+          required: true,
+          min: 0,
+          max: 2
+        }
+      },
+      messages: {
+        name: {
+          required: "Name is required",
+          minlength: "Max length name is 255"
+        },
+        start_date: {
+          required: "Start Date is required",
+          date: "Start Date is invalid",
+        },
+        end_date: {
+          required: "End date is required",
+          date: "End date is invalid",
+        },
+        status: {
+          required: "Status is required",
+          min: "Invalid status",
+          max: "Invalid status",
+        }
+      },
+    });
+
+    //Validate edit_form
+    $("#edit_form").validate({
       rules: {
         name: {
           required: true,

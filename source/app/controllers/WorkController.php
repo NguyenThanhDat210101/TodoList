@@ -38,4 +38,14 @@ class WorkController
             header('Location: /todoList/source/index.php');
         };
     }
+
+    /**
+     * Function update data to table works
+     *
+     * @return array
+     */
+    public function update($id, $data)
+    {
+        return $this->work->update($id, $data);
+    }
 }

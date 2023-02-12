@@ -133,4 +133,19 @@ class Model
         // Get the number of records affected
         return $statement->affected_rows;
     }
+
+    /**
+     * Delete data table by id
+     *
+     * @param int $id
+     * @return int
+     */
+    public function delete($id){
+        $sql = "DELETE FROM $this->table where id =?";
+        $statement = $this->connection->prepare($sql);
+        $statement->bind_param('i',$id);
+        $statement->execute();
+        // Get the number of records affected
+        return $statement->affected_rows;
+    }
 }

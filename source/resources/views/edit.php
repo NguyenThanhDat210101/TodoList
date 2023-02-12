@@ -20,6 +20,11 @@ if (isset($_POST['update'])) {
         echo $message;
     }
 }
+
+if (isset($_POST['delete'])) {
+    $id = $_POST['id'];
+    $workController->delete($id);
+}
 ?>
 <!-- Modal -->
 <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">

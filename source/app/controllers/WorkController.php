@@ -48,4 +48,14 @@ class WorkController
     {
         return $this->work->update($id, $data);
     }
+
+    /**
+     * Function delete data to table works
+     *
+     * @return array
+     */
+    public function delete($id)
+    {
+        return $this->work->delete($id);
+    }
 }

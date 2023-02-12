@@ -1,0 +1,17 @@
+.space-top {
+    margin-top: 10%;
+}
+
+.form-save {
+    position: relative;
+    padding: 0rem 18rem;
+}
+
+.show-display {
+    display: block !important;
+}
+
+.error {
+    border-color: red !important;
+    color: red !important;
+}

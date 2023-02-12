@@ -1,7 +1,7 @@
 <?php
 class WorkController
 {
-    protected  $work;
+    protected $work;
     /**
      * Constructor controller
      *
@@ -34,7 +34,7 @@ class WorkController
     public function insert($data)
     {
         //If insert is success then redirect to index
-        if($this->work->insert($data)) {
+        if ($this->work->insert($data)) {
             header('Location: /todoList/source/index.php');
         };
     }

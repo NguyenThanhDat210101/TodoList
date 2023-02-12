@@ -9,10 +9,10 @@ if (isset($_POST['create'])) {
         $message = '<div class="form-save">
                         <div class="alert alert-danger" role="alert">
                             <p>';
-                        foreach ($errorMSG as $detailMSG) {
-                            $message .= $detailMSG . '<br>';
-                        }
-                        $message .= '</p>
+        foreach ($errorMSG as $detailMSG) {
+            $message .= $detailMSG . '<br>';
+        }
+        $message .= '</p>
                         </div>
                     </div>';
         echo $message;

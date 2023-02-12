@@ -1,4 +1,9 @@
 <?php
+
+namespace App\Models;
+
+use mysqli;
+
 class Model
 {
     protected $connection = null;
@@ -101,7 +106,7 @@ class Model
         $statement = $this->connection->prepare($sql);
         $statement->bind_param('i', $id);
         $statement->execute();
-        // Retrieves all of the rows of the result 
+        // Retrieves all of the rows of the result
         $resultSet = $statement->get_result();
         return $resultSet->fetch_assoc();
     }
@@ -128,7 +133,7 @@ class Model
         // Run sql
         $sql = "UPDATE $this->table set $field where id=? ";
         $statement = $this->connection->prepare($sql);
-        $statement->bind_param(str_repeat('s',count($request)).'i', ...$data);
+        $statement->bind_param(str_repeat('s', count($request)) . 'i', ...$data);
         $statement->execute();
         // Get the number of records affected
         return $statement->affected_rows;
@@ -140,10 +145,11 @@ class Model
      * @param int $id
      * @return int
      */
-    public function delete($id){
+    public function delete($id)
+    {
         $sql = "DELETE FROM $this->table where id =?";
         $statement = $this->connection->prepare($sql);
-        $statement->bind_param('i',$id);
+        $statement->bind_param('i', $id);
         $statement->execute();
         // Get the number of records affected
         return $statement->affected_rows;

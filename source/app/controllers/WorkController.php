@@ -1,4 +1,8 @@
 <?php
+namespace App\Controllers;
+
+use App\Models\Work;
+
 class WorkController
 {
     protected $work;
@@ -37,6 +41,16 @@ class WorkController
         if ($this->work->insert($data)) {
             header('Location: /todoList/source/index.php');
         };
+    }
+
+    /**
+     * Function find data to table works by id
+     *
+     * @return array
+     */
+    public function find($id)
+    {
+        return $this->work->find($id);
     }
 
     /**

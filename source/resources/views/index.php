@@ -1,9 +1,6 @@
 <?php
-require_once('./app/models/Work.php');
-require_once('./app/controllers/WorkController.php');
-// You can use to variable message in file message.php
-require_once('./app/label/message.php');
-require_once('./app/label/works/status.php');
+use App\Controllers\WorkController;
+use App\Models\Work;
 
 $model = new Work();
 $workController = new WorkController($model);

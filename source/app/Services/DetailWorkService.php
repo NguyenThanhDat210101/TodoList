@@ -1,5 +1,6 @@
 <?php
 require_once('../models/Model.php');
+require_once('../models/config.php');
 require_once('../models/Work.php');
 require_once('../controllers/WorkController.php');
 use App\Controllers\WorkController;

@@ -31,7 +31,7 @@ $workController = new WorkController($model);
         let workId = event.event._def.publicId;
         $('#modalEdit').modal('show');
         $.ajax({
-          url: "./app/Services/DetailWorkService.php",
+          url: "./app/services/DetailWorkService.php",
           type: "GET",
           data: {
             workId: workId

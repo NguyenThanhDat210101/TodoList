@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\Work;
@@ -39,7 +40,9 @@ class WorkController
     {
         //If insert is success then redirect to index
         if ($this->work->insert($data)) {
-            header('Location: /todoList/source/index.php');
+            ob_start();
+            header("Location: http://localhost");
+            ob_end_flush();
         };
     }
 

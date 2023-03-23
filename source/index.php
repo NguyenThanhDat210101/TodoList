@@ -17,6 +17,7 @@
 <body>
     <?php
     require_once('./app/models/Model.php');
+    require_once('./app/models/config.php');
     require_once('./app/models/Work.php');
     require_once('./app/controllers/WorkController.php');
     // You can use to variable message in file message.php

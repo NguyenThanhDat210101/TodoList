@@ -1,0 +1,41 @@
+version: '3'
+services:
+  #PHP Service
+  app:
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    restart: unless-stopped
+    tty: true
+    working_dir: /php
+    volumes:
+      - ./source/:/php
+      - ./docker/php-fpm/local.ini:/usr/local/etc/php/conf.d/local.ini
+    ports: 
+      - 80:80
+    networks:
+      - app-network
+    depends_on: 
+      - mysql
+  #MySQL Service
+  mysql:
+    image: mysql:latest
+    restart: unless-stopped
+    hostname: dbdata
+    ports:
+      - "33061:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+    env_file:
+      - ./docker/env/.env_mysql
+    networks:
+      - app-network
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+#Volumes
+volumes:
+  dbdata:
+    driver: local

@@ -2,14 +2,13 @@
 namespace App\Models;
 
 use mysqli;
+use App\Models\Config;
 
 class Model
 {
     protected $connection = null;
-    protected $username = '';
-    protected $password = '';
-    protected $databaseName = '';
-    protected $host = '';
+    protected $config = [];
+    protected $table = null;
 
     /**
      * Constructor
@@ -17,10 +16,7 @@ class Model
      */
     public function __construct()
     {
-        $this->host = '127.0.0.1';
-        $this->username = 'root';
-        $this->password = '';
-        $this->databaseName = 'todo-list';
+        $this->config = Config::CONFIG_ENV;
         //connect mysql
         $this->connect();
     }
@@ -33,11 +29,13 @@ class Model
     public function connect()
     {
         $this->connection = new mysqli(
-            $this->host,
-            $this->username,
-            $this->password,
-            $this->databaseName
+            $this->config['host'],
+            $this->config['username'],
+            $this->config['password'],
+            $this->config['databaseName'],
+            $this->config['port'],
         );
+
         if ($this->connection->connect_errno) {
             exit($this->connection->connect_error);
         }
